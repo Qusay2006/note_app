@@ -1,20 +1,7 @@
 import 'dart:io';
-
 import 'package:rivaan_project2/core/error/app_exeption.dart';
 import 'package:rivaan_project2/features/blog/data/model/blog_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
-
-
-// شراح ليش حطينا select بلاخير عند addBlog function
-
-
-
-
-
-
-
-
 
 
 abstract interface class BlogRemoteData {
@@ -43,10 +30,6 @@ class BlogRemoteDataImpl implements BlogRemoteData{
   Future<String> uploadImage(BlogModel blog, File image) async{
     try {
         await _supabaseClient.storage.from(
-          //id in supabase sqlEditor
-          //id in supabase sqlEditor
-          //id in supabase sqlEditor
-          //id in supabase sqlEditor
            'blog_images').upload(blog.id, image);
         return _supabaseClient.storage.from('blog_images').getPublicUrl(blog.id);
     } catch (e) {
@@ -55,19 +38,11 @@ class BlogRemoteDataImpl implements BlogRemoteData{
   }
 
 
-  //مافهمت التحت
-
-
-
-
-
   @override
   Future<List<BlogModel>> getBlogs() async{
     try{
-      final blog =await _supabaseClient.from('blogs').select(
-        //لتاخد كل الداتا مع اسم اليوزر لانو ال مافي بلblog hsl hgd,.v
-         '*,profile(name)');
-      return blog.map((e) => BlogModel.fromJson(e).copyWith(posterName: e['profile']['name']),).toList();
+      final blog =await _supabaseClient.from('blogs').select('*,profiles(name)');
+      return blog.map((e) => BlogModel.fromJson(e).copyWith(posterName: e['profiles']['name']),).toList();
     }catch (e){
       throw AppException(e.toString());
     }

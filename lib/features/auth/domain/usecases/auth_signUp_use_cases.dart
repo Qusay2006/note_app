@@ -4,13 +4,6 @@ import 'package:rivaan_project2/core/usecases/use_cases.dart';
 import 'package:rivaan_project2/core/common/entity/user_entity.dart';
 import 'package:rivaan_project2/features/auth/domain/repository/auth_repo.dart';
 
-
-
-// تاكد انو ليش ماحطينا نرجع Either? وليش لسا بس اسمو call
-
-
-
-
 class AuthSignupUseCases implements UseCases<UserEntity,UserSignUpPrams>{
   final AuthRepo _repo ;
   AuthSignupUseCases({required this._repo});

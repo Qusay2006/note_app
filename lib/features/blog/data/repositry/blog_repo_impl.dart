@@ -8,21 +8,26 @@ import 'package:rivaan_project2/features/blog/data/datasource/locaData/blog_loca
 import 'package:rivaan_project2/features/blog/data/model/blog_model.dart';
 import 'package:rivaan_project2/features/blog/domain/entity/blog_entity.dart';
 import 'package:rivaan_project2/features/blog/domain/repo/blog_repo.dart';
+import 'package:uuid/uuid.dart';
 
 class BlogRepoImpl implements BlogRepo {
   final BlogRemoteData _remoteData;
   final ConnectionChecker _connectionChecker;
   final BlogLocalDataSource _localData;
-  BlogRepoImpl({required this._remoteData, required this._connectionChecker, required this._localData});
+  BlogRepoImpl({required BlogRemoteData remoteData,
+    required ConnectionChecker connectionChecker,
+    required BlogLocalDataSource localData})
+   : _remoteData = remoteData ,
+  _connectionChecker = connectionChecker,
+  _localData = localData;
 
   @override
   Future<Either<Failures, BlogEntity>> addBlog(BlogEntity blog, File imageUrl) async {
+    final String blogId = const Uuid().v4();
     try {
       if(!await _connectionChecker.isConnected)
-        {
           return Left(Failures("No Internet Connection"));
-        }
-      final blogmodel = BlogModel(id: blog.id,
+      final blogmodel = BlogModel(id: blogId,
           posterId: blog.posterId,
           title: blog.title,
           content: blog.content,

@@ -28,6 +28,7 @@ class BlogModel extends Equatable {
     );
   }
 
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -38,6 +39,20 @@ class BlogModel extends Equatable {
       'updated_at': updatedAt.toIso8601String(),
       'poster_id': posterId,
     };
+  }
+  factory BlogModel.fromHiveJson(Map<dynamic, dynamic> json) {
+    return BlogModel(
+      id: json['id'] as String,
+      title: json['title'] ?? '',
+      content: json['content'] ?? '',
+      imageUrl: json['image_url'] ?? '',
+      topics: List<String>.from(json['topics'] ?? []),
+      updatedAt: json['updated_at'] == null
+          ? DateTime.now()
+          : DateTime.parse(json['updated_at']),
+      posterId: json['poster_id'] ?? '',
+      posterName: json['posterName'],
+    );
   }
 
   @override
@@ -62,7 +77,7 @@ BlogModel copyWith({
       imageUrl: imageUrl??this.imageUrl,
       topics: topics??this.topics,
       updatedAt: updatedAt??this.updatedAt,
-      posterName: posterName??this.posterId
+      posterName: posterName??this.posterName
   );
 }
   BlogEntity toEntity() {

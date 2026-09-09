@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rivaan_project2/core/common/cubit/app_user_cubit.dart';
 import 'package:rivaan_project2/core/common/cubit/app_user_state.dart';
 import 'package:rivaan_project2/core/injection/auth_get_it.dart';
@@ -7,6 +9,7 @@ import 'package:rivaan_project2/core/injection/blog_get_it.dart';
 import 'package:rivaan_project2/core/secrets/app_secrets.dart';
 import 'package:rivaan_project2/features/auth/presintation/bloc/auth_bloc.dart';
 import 'package:rivaan_project2/features/auth/presintation/bloc/auth_event.dart';
+import 'package:rivaan_project2/features/auth/presintation/pages/login_page.dart';
 import 'package:rivaan_project2/features/blog/presintation/bloc/blog_bloc.dart';
 import 'package:rivaan_project2/features/blog/presintation/page/blog_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -16,6 +19,8 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
  await Supabase.initialize(url: AppSecrets.supbabaseUrl,
      publishableKey: AppSecrets.supbabaseAnnonKey);
+  await Hive.initFlutter();
+  await Hive.openBox('blogs');
  authGetIT();
  blogGetIt();
   runApp(MultiBlocProvider(providers:
@@ -47,10 +52,10 @@ class _MyAppState extends State<MyApp> {
                 loggedIn: (user) => true,),
           builder: (context, isLoggedIn) {
         if(isLoggedIn){
-          return const BlogPage();
+          return const LoginPage();
         }
         else{
-            return const BlogPage();
+            return const LoginPage();
           }
           }));
   }

@@ -12,18 +12,6 @@ import '../bloc/auth_event.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/auth_field.dart';
 
-
-
-
-
-
-// state.when بدل ال state.when  انو خلص منحطif(state is BlocState.error)
-
-
-
-
-
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 

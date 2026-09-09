@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rivaan_project2/core/injection/auth_get_it.dart';
 import 'package:rivaan_project2/core/common/entity/user_entity.dart';
-import 'package:rivaan_project2/features/auth/domain/usecases/auth_signUp_use_cases.dart';
 import 'package:rivaan_project2/features/auth/presintation/bloc/auth_bloc.dart';
 import 'package:rivaan_project2/features/auth/presintation/bloc/auth_event.dart';
 import '../../../../core/bloc/bloc_state.dart';
 import '../../../../core/theme/app_pallete.dart';
-import '../../../blog/presintation/page/blog_page.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/auth_field.dart';
 import 'login_page.dart';
@@ -109,7 +106,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:
               Text('welcome ${data.name}')));
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return BlogPage();
+                return LoginPage();
               },));
             },
           );

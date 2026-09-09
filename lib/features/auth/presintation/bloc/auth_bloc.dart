@@ -1,5 +1,3 @@
- import 'dart:math';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rivaan_project2/core/bloc/bloc_state.dart';
 import 'package:rivaan_project2/core/common/cubit/app_user_cubit.dart';
@@ -27,21 +25,22 @@ class AuthBloc extends Bloc<AuthEvent,BlocState<UserEntity>> {
 
     void isLogedIn(
         UserEntity user,
-        Emitter<BlocState> emit
+        Emitter<BlocState<UserEntity>> emit
         ) {
       _userCubit.updatedUser(user);
       emit(BlocState.success(user));
     }
 
-  on<AuthEvent>((event, emit) => emit(BlocState.loading()),);
-
   on <AuthSingUpEvent>((event, emit)async {
+    emit(BlocState.loading());
      final result =  await _signupUseCases.call(UserSignUpPrams(name: event.name, email: event.email, password:event.password));
       result.fold((l) => emit(BlocState.error(l.message)),
             (user) => isLogedIn(user,emit),);
   },);
 
   on<AuthLogInEvent>((event, emit) async{
+    emit(BlocState.loading());
+
     final result =await _loginUseCase.call(UserLogInPrams(email: event.email, password:event.password));
     return result.fold((l) {
       emit(BlocState.error(l.message));
@@ -49,6 +48,7 @@ class AuthBloc extends Bloc<AuthEvent,BlocState<UserEntity>> {
   },);
 
   on <AuthCurrentUserEvent>((event, emit)async {
+    emit(BlocState.loading());
     final resutl =await _currentUserUseCase.call(EmptyPrams());
     resutl.fold((l) => emit(BlocState.error(l.message)),
           (currentUser) =>isLogedIn(currentUser , emit),);

@@ -14,18 +14,21 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../network/connection_checker.dart';
 
 final slBlog=GetIt.instance;
-void blogGetIt(){
-  slBlog.registerLazySingleton(() => Supabase.instance.client,);
-  slBlog.registerLazySingleton(() => InternetConnection(),);
-  slBlog.registerLazySingleton(() => Hive.box('blogs'),);
+void blogGetIt() {
+  slBlog.registerLazySingleton<Box>(() => Hive.box('blogs'));
 
-  slBlog.registerLazySingleton<BlogRemoteData>(() => BlogRemoteDataImpl(supabaseClient: slBlog()),);
-  slBlog.registerFactory(() => ConnectionChecker,);
-  slBlog.registerLazySingleton<BlogLocalDataSource>(() => BlogLocalDataSourceImpl(slBlog()),);
-  slBlog.registerLazySingleton<BlogRepo>(() => BlogRepoImpl(remoteData: slBlog(), connectionChecker: slBlog(), localData: slBlog()),);
+  slBlog.registerLazySingleton<BlogRemoteData>(() =>
+      BlogRemoteDataImpl(supabaseClient: slBlog()),);
+  slBlog.registerLazySingleton<BlogLocalDataSource>(() =>
+      BlogLocalDataSourceImpl(slBlog()),);
+  slBlog.registerLazySingleton<BlogRepo>(() =>
+      BlogRepoImpl(remoteData: slBlog(),
+          connectionChecker: slBlog(),
+          localData: slBlog()),);
   slBlog.registerLazySingleton(() => AddedBlogUseCase(repo: slBlog()),);
   slBlog.registerLazySingleton(() => GetBlogUseCase(repo: slBlog()),);
-  slBlog.registerFactory(() => BlogBloc(
-        addedBlogUserCase: slBlog()
-      , getBlocUseCase: slBlog()));
+  slBlog.registerFactory(() =>
+      BlogBloc(
+          addedBlogUserCase: slBlog()
+          , getBlocUseCase: slBlog()));
 }

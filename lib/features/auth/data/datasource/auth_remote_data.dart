@@ -24,7 +24,7 @@ class AuthRemoteDataImpl implements AuthRemoteData {
       final result = await supabaseClient.auth.signInWithPassword(
           password: password, email: email);
       if (result.user == null) {
-        throw const AppException('User is null');
+        throw const AppException('account is not registered');
       }
       return UserModel.fromJson(result.user!.toJson());
     } catch (e) {

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:rivaan_project2/core/utild/calculate_reading_time.dart';
 import 'package:rivaan_project2/core/utild/format_date.dart';
 import 'package:rivaan_project2/features/blog/domain/entity/blog_entity.dart';
-
 import '../../../../core/theme/app_pallete.dart';
 
 class BlogDetailsPage extends StatelessWidget {
