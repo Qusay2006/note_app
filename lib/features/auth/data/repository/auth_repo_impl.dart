@@ -7,7 +7,13 @@ import 'package:rivaan_project2/features/auth/data/datasource/localdata/auth_loc
 import 'package:rivaan_project2/features/auth/data/datasource/remote/auth_remote_data.dart';
 import 'package:rivaan_project2/core/common/entity/user_entity.dart';
 import 'package:rivaan_project2/features/auth/data/model/user_model.dart';
-import 'package:rivaan_project2/features/auth/domain/repository/auth_repo.dart';
+import 'package:fpdart/fpdart.dart';
+
+abstract interface class AuthRepo {
+  Future<Either<Failures,UserEntity>> login({required String email, required String password});
+  Future<Either<Failures,UserEntity>> signUp({required String name, required String email, required String password});
+  Future<Either<Failures,UserEntity>>currentUser();
+}
 
 @LazySingleton(as :AuthRepo)
 class AuthRepoImpl implements AuthRepo {

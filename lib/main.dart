@@ -20,14 +20,8 @@ void main() async{
   await Hive.initFlutter();
   await Hive.openBox('blogs');
   configureDependencies();
-  runApp(MultiBlocProvider(providers:
-      [
-        BlocProvider(create: (context) => getIt<AuthBloc>()),
-        BlocProvider(create: (context) => getIt<AuthBloc>(),),
-        BlocProvider(create: (context) => getIt<BlogBloc>(),)
-      ], child:const MyApp()) );
+  runApp(const MyApp());
 }
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -49,11 +43,11 @@ class _MyAppState extends State<MyApp> {
                 loggedIn: (user) => true,),
           builder: (context, isLoggedIn) {
         if(isLoggedIn){
-          return const BlogPage();
+          return const BlogProvider();
         }
         else{
-            return const LoginPage();
-          }
-          }));
+          return const LoginProvider();
+        }
+      }));
   }
 }

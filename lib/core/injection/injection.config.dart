@@ -27,8 +27,6 @@ import 'package:rivaan_project2/features/auth/data/datasource/remote/auth_remote
     as _i260;
 import 'package:rivaan_project2/features/auth/data/repository/auth_repo_impl.dart'
     as _i180;
-import 'package:rivaan_project2/features/auth/domain/repository/auth_repo.dart'
-    as _i719;
 import 'package:rivaan_project2/features/auth/domain/usecases/auth_current_user_use_case.dart'
     as _i706;
 import 'package:rivaan_project2/features/auth/domain/usecases/auth_login_use_case.dart'
@@ -63,8 +61,6 @@ import 'package:rivaan_project2/features/blog/presintation/bloc/blog_bloc.dart'
     as _i147;
 import 'package:rivaan_project2/features/blog/presintation/cubit/quote_cubit.dart'
     as _i337;
-import 'package:rivaan_project2/features/subscribe/data/repo/sub_repo.dart'
-    as _i479;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -92,7 +88,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i311.BlogLocalDataSource>(
       () => _i311.BlogLocalDataSourceImpl(gh<_i979.Box<dynamic>>()),
     );
-    gh.lazySingleton<_i479.SubRepo>(() => _i479.SubRepoImpl());
     gh.lazySingleton<_i260.AuthRemoteData>(
       () =>
           _i260.AuthRemoteDataImpl(supabaseClient: gh<_i454.SupabaseClient>()),
@@ -133,27 +128,27 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i254.QuoteRepository>(
       () => _i968.QuoteRepositoryImpl(remoteData: gh<_i412.QuoteRemoteData>()),
     );
-    gh.lazySingleton<_i719.AuthRepo>(
+    gh.lazySingleton<_i180.AuthRepo>(
       () => _i180.AuthRepoImpl(
         authRemoteData: gh<_i260.AuthRemoteData>(),
         connectionChecker: gh<_i70.ConnectionChecker>(),
         localData: gh<_i566.AuthLocalData>(),
       ),
     );
-    gh.lazySingleton<_i706.AuthCurrentUserUseCase>(
-      () => _i706.AuthCurrentUserUseCase(repo: gh<_i719.AuthRepo>()),
-    );
-    gh.lazySingleton<_i198.AuthLoginUseCase>(
-      () => _i198.AuthLoginUseCase(repo: gh<_i719.AuthRepo>()),
-    );
-    gh.lazySingleton<_i1.AuthSignupUseCases>(
-      () => _i1.AuthSignupUseCases(repo: gh<_i719.AuthRepo>()),
-    );
     gh.factory<_i147.BlogBloc>(
       () => _i147.BlogBloc(
         addedBlogUserCase: gh<_i666.AddedBlogUseCase>(),
         getBlocUseCase: gh<_i423.GetBlogUseCase>(),
       ),
+    );
+    gh.lazySingleton<_i706.AuthCurrentUserUseCase>(
+      () => _i706.AuthCurrentUserUseCase(repo: gh<_i180.AuthRepo>()),
+    );
+    gh.lazySingleton<_i198.AuthLoginUseCase>(
+      () => _i198.AuthLoginUseCase(repo: gh<_i180.AuthRepo>()),
+    );
+    gh.lazySingleton<_i1.AuthSignupUseCases>(
+      () => _i1.AuthSignupUseCases(repo: gh<_i180.AuthRepo>()),
     );
     gh.lazySingleton<_i623.GetQuoteUseCase>(
       () => _i623.GetQuoteUseCase(repo: gh<_i254.QuoteRepository>()),

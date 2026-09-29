@@ -11,6 +11,20 @@ import 'package:rivaan_project2/features/blog/domain/entity/blog_entity.dart';
 import 'package:rivaan_project2/features/blog/presintation/bloc/blog_bloc.dart';
 import 'package:rivaan_project2/features/blog/presintation/bloc/blog_event.dart';
 import 'package:rivaan_project2/features/blog/presintation/widget/blog_field.dart';
+import '../../../../core/injection/injection.dart';
+
+class AddNewBlogProvider extends StatelessWidget {
+  const AddNewBlogProvider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(create: (context) => getIt<BlogBloc>(),
+      child: AddNewBlogPage(),);
+  }
+}
+
+
+
 
 class AddNewBlogPage extends StatefulWidget {
   const AddNewBlogPage({super.key});

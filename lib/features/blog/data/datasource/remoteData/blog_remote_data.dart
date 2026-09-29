@@ -12,9 +12,8 @@ abstract interface class BlogRemoteData {
 
 @LazySingleton(as: BlogRemoteData)
 class BlogRemoteDataImpl implements BlogRemoteData{
- final SupabaseClient _supabaseClient;
+  final SupabaseClient _supabaseClient;
   BlogRemoteDataImpl({required this._supabaseClient});
-
   @override
   Future<BlogModel> addBlogs(BlogModel blog)async {
     try {
@@ -26,20 +25,16 @@ class BlogRemoteDataImpl implements BlogRemoteData{
       throw AppException(e.toString());
     }
   }
-
   @override
   Future<String> uploadImage(BlogModel blog, File image) async{
     try {
-        await _supabaseClient.storage.from(
-          //bucket
-           'blog_images').upload(blog.id, image);
-        return _supabaseClient.storage.from('blog_images').getPublicUrl(blog.id);
-    } catch (e) {
-      throw AppException(e.toString());
+      await _supabaseClient.storage.from(
+          'blog_images').upload(blog.id, image);
+      return _supabaseClient.storage.from('blog_images').getPublicUrl(blog.id);
+    }  catch (e) {
+       throw AppException(e.toString());
     }
   }
-
-
   @override
   Future<List<BlogModel>> getBlogs() async{
     try{
@@ -49,6 +44,4 @@ class BlogRemoteDataImpl implements BlogRemoteData{
       throw AppException(e.toString());
     }
   }
-
-
 }

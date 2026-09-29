@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rivaan_project2/core/bloc/bloc_state.dart';
+import 'package:rivaan_project2/core/injection/injection.dart';
 import 'package:rivaan_project2/core/theme/app_pallete.dart';
 import 'package:rivaan_project2/features/blog/domain/entity/blog_entity.dart';
 import 'package:rivaan_project2/features/blog/presintation/bloc/blog_bloc.dart';
 import 'package:rivaan_project2/features/blog/presintation/bloc/blog_event.dart';
 import 'package:rivaan_project2/features/blog/presintation/page/add_new_blog_page.dart';
 import 'package:rivaan_project2/features/blog/presintation/widget/blog_card.dart';
+
+
+class BlogProvider extends StatelessWidget {
+  const BlogProvider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(create: (context) => getIt<BlogBloc>(),
+    child: BlogPage(),);
+  }
+}
+
+
 
 class BlogPage extends StatefulWidget {
   const BlogPage({super.key});
@@ -29,7 +43,7 @@ class _BlogPageState extends State<BlogPage> {
       actions: [
         IconButton(onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return AddNewBlogPage();
+            return AddNewBlogProvider();
           },));
         }, icon: Icon(Icons.add_circle))
       ],),

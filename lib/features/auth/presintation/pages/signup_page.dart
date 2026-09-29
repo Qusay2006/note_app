@@ -4,11 +4,21 @@ import 'package:rivaan_project2/core/common/entity/user_entity.dart';
 import 'package:rivaan_project2/features/auth/presintation/bloc/auth_bloc.dart';
 import 'package:rivaan_project2/features/auth/presintation/bloc/auth_event.dart';
 import '../../../../core/bloc/bloc_state.dart';
+import '../../../../core/injection/injection.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/auth_field.dart';
 import 'login_page.dart';
 
+class SignUpProvider extends StatelessWidget {
+  const SignUpProvider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(create: (context) => getIt<AuthBloc>() ,
+      child: SignUpPage(),);
+  }
+}
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
