@@ -5,7 +5,6 @@ import 'package:rivaan_project2/core/bloc/bloc_state.dart';
 import 'package:rivaan_project2/core/common/entity/user_entity.dart';
 import 'package:rivaan_project2/features/auth/presintation/pages/signup_page.dart';
 import 'package:rivaan_project2/features/blog/presintation/page/blog_page.dart';
-import '../../../../core/injection/auth_get_it.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';

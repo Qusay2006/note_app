@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:rivaan_project2/core/error/app_exeption.dart';
 import 'package:rivaan_project2/features/auth/data/model/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -9,7 +10,7 @@ abstract interface class AuthRemoteData {
   Session? get currentUserState;
 }
 
-
+@LazySingleton(as :AuthRemoteData)
 class AuthRemoteDataImpl implements AuthRemoteData {
   final SupabaseClient supabaseClient;
   AuthRemoteDataImpl({required this.supabaseClient});

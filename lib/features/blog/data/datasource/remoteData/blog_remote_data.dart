@@ -1,8 +1,8 @@
 import 'dart:io';
+import 'package:injectable/injectable.dart';
 import 'package:rivaan_project2/core/error/app_exeption.dart';
 import 'package:rivaan_project2/features/blog/data/model/blog_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
 
 abstract interface class BlogRemoteData {
   Future<List<BlogModel>>getBlogs();
@@ -10,6 +10,7 @@ abstract interface class BlogRemoteData {
   Future<String> uploadImage(BlogModel blog, File image);
 }
 
+@LazySingleton(as: BlogRemoteData)
 class BlogRemoteDataImpl implements BlogRemoteData{
  final SupabaseClient _supabaseClient;
   BlogRemoteDataImpl({required this._supabaseClient});
@@ -30,6 +31,7 @@ class BlogRemoteDataImpl implements BlogRemoteData{
   Future<String> uploadImage(BlogModel blog, File image) async{
     try {
         await _supabaseClient.storage.from(
+          //bucket
            'blog_images').upload(blog.id, image);
         return _supabaseClient.storage.from('blog_images').getPublicUrl(blog.id);
     } catch (e) {

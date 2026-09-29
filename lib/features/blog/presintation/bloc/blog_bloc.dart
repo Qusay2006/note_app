@@ -1,11 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:rivaan_project2/core/bloc/bloc_state.dart';
 import 'package:rivaan_project2/features/blog/domain/entity/blog_entity.dart';
 import 'package:rivaan_project2/features/blog/domain/usecases/added_blog_use_case.dart';
 import 'package:rivaan_project2/features/blog/domain/usecases/get_blog_use_case.dart';
 import 'blog_event.dart';
 
-
+@injectable
 class BlogBloc extends Bloc<BlogEvent, BlocState<BlogEntity>> {
   final AddedBlogUseCase _addedBlogUseCase;
   final GetBlogUseCase _getBlogUseCase;

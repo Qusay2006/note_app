@@ -1,9 +1,11 @@
 import 'package:fpdart/src/either.dart';
+import 'package:injectable/injectable.dart';
 import 'package:rivaan_project2/core/error/app_faliure.dart';
 import 'package:rivaan_project2/core/usecases/use_cases.dart';
 import 'package:rivaan_project2/core/common/entity/user_entity.dart';
 import 'package:rivaan_project2/features/auth/domain/repository/auth_repo.dart';
 
+@lazySingleton
 class AuthLoginUseCase implements UseCases<UserEntity,UserLogInPrams>{
   final AuthRepo _repo;
   AuthLoginUseCase({required this._repo});

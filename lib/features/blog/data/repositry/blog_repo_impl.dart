@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:fpdart/fpdart.dart';
+import 'package:injectable/injectable.dart';
 import 'package:rivaan_project2/core/error/app_exeption.dart';
 import 'package:rivaan_project2/core/error/app_faliure.dart';
 import 'package:rivaan_project2/core/network/connection_checker.dart';
@@ -10,6 +11,7 @@ import 'package:rivaan_project2/features/blog/domain/entity/blog_entity.dart';
 import 'package:rivaan_project2/features/blog/domain/repo/blog_repo.dart';
 import 'package:uuid/uuid.dart';
 
+@LazySingleton(as: BlogRepo)
 class BlogRepoImpl implements BlogRepo {
   final BlogRemoteData _remoteData;
   final ConnectionChecker _connectionChecker;
@@ -54,8 +56,8 @@ class BlogRepoImpl implements BlogRepo {
         }
         else
            {
-             final dd = _localData.loadBlogs().map((e) =>e.toEntity()).toList();
-             return Right(dd);
+             final blog = _localData.loadBlogs().map((e) =>e.toEntity()).toList();
+             return Right(blog);
            }
 
       }on AppException

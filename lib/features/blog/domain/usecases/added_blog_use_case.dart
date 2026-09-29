@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:fpdart/src/either.dart';
+import 'package:injectable/injectable.dart';
 import 'package:rivaan_project2/core/error/app_faliure.dart';
 import 'package:rivaan_project2/core/usecases/use_cases.dart';
 import 'package:rivaan_project2/features/blog/domain/entity/blog_entity.dart';
 import 'package:rivaan_project2/features/blog/domain/repo/blog_repo.dart';
 
+@lazySingleton
 class AddedBlogUseCase implements UseCases<BlogEntity , AddedBlogParms>{
   final BlogRepo _repo;
   AddedBlogUseCase({required this._repo});

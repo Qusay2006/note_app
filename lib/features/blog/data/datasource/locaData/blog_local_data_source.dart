@@ -1,4 +1,5 @@
   import 'package:hive/hive.dart';
+import 'package:injectable/injectable.dart';
   import 'package:rivaan_project2/features/blog/data/model/blog_model.dart';
 
   abstract interface class BlogLocalDataSource {
@@ -6,6 +7,7 @@
     List<BlogModel> loadBlogs() ;
   }
 
+  @LazySingleton(as: BlogLocalDataSource)
   class BlogLocalDataSourceImpl implements BlogLocalDataSource{
     final Box box;
     BlogLocalDataSourceImpl(this.box);

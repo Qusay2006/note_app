@@ -26,6 +26,8 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
   File? image;
   final formKey = GlobalKey<FormState>();
 
+
+  // هي غلط
   Widget _addedBlogForm(BuildContext context) {
     return Scaffold(appBar: AppBar(actions: [
       IconButton(onPressed: () {

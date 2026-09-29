@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:rivaan_project2/core/bloc/bloc_state.dart';
 import 'package:rivaan_project2/core/common/cubit/app_user_cubit.dart';
 import 'package:rivaan_project2/core/common/entity/user_entity.dart';
@@ -7,6 +8,7 @@ import 'package:rivaan_project2/features/auth/domain/usecases/auth_login_use_cas
 import 'package:rivaan_project2/features/auth/domain/usecases/auth_signUp_use_cases.dart';
 import 'package:rivaan_project2/features/auth/presintation/bloc/auth_event.dart';
 
+@Injectable()
 class AuthBloc extends Bloc<AuthEvent,BlocState<UserEntity>> {
   final AuthSignupUseCases _signupUseCases;
   final AuthLoginUseCase _loginUseCase;
